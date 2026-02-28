@@ -1,0 +1,105 @@
+                                                  SQL NOTES 2 -PART 2
+
+Grouped By : it is used to group the records
+             group by statement groups rows that have the same values in one or more columns.
+             the group by statement is used with aggregate functions like count,max,min,sum,avg to group the result set by one or more columns.
+
+Note:
+group by clause is used to group the records
+group by executes row by row
+any clause which executed after group by, it must execute group by group only.
+the col_name/exp used for grouping can also be used in select clause.
+it executes after the execution of where clause.
+group by clause can be used without where  clause.
+we can also write multiple columns in group by clause.
+
+syntax:
+select group_function/group-by_exp
+from table_name
+[where <filter_condition>]      //optional
+group by column_name
+
+order of execution:
+from clause
+where clause      -->row by rows
+group by clause   -->row by row
+select clause    -->group by group
+
+
+
+HAVING CLAUSE :
+
+syntax:
+select group_function/group-by_exp
+from table_name
+[where <filter_condition>]      //optional
+group by column_name
+having <group_filter_condition>
+
+order of execution:
+from clause
+where clause      -->row by rows
+group by clause   -->row by row
+having clause
+5. select clause    -->group by group
+
+Q: display the no of employee's in each dept only if there are atleast 4 employees
+ans: select count(*), deptno from emp group by deptno having count(*)>=4;
+
+Q: display the no of employee's in each dept only if there are atleast 4 employees
+ans: select count(*), deptno from emp group by deptno having count(*)>=4;
+
+Q: display no of empoyee in each dep having atleast 2 emp in it, and there name consit of char 'a' or 's'
+select count(*), deptno from emp where ename like '%s' or ename like '%a' group by deptno having count(*)>=2;
+
+-- display the salary which are repeated in emp
+select count(sal)as 'count' ,sal 'salary' from emp group by(sal) having count(sal)>1;
+
+-- display job and total salary of each job , if the total salary of each job is more than 9500
+select job, sum(sal) from emp  group by job having sum(sal)>=9500;
+
+-- display number of emp earning sal more than 1200 in each job
+select job , count(*) as no_of_emp from emp where sal>=1200 group by job;
+
+-- display number of employee earning sal more than 1200 in each job and the total sal needed to pay and of each job must exeeds 3800
+select job, COUNT(*) as no_of_employees, sum(sal) as total_salary from emp
+where sal > 1200
+group by job
+having sum(sal) > 3800;
+
+-- display job and max sal fo emp in each job if the max sal exeeds 2600
+select job, max(sal) as max_salary from emp group by job having max(sal) > 2600;
+
+-- display the hiredate which are duplicate in emp table
+select hiredate from emp group by hiredate having count(*) > 1;
+
+-- display min and max sal of each job if min sal is more than 1000 and max sal is less than 5000
+select job ,max(sal) as max_sal , min(sal) as min_sal from emp group by job having min(sal)>=1000 and
+max(sal)<=5000;
+
+-- display deptno and number of emp working only if there are 2 emp working in each dept as manager
+select deptno, count(*) as no_of_managers from emp where job = 'MANAGER' group by deptno
+having COUNT(*) = 2;
+
+
+
+ORDER BY CLAUSE : it is used to short the result table
+
+syntax:
+select group_function/group-by_exp
+from table_name
+[where <filter_condition>]      //optional
+[group by column_name]
+[having <group_filter_condition>]
+order by col_name asc/desc
+
+order of execution:
+from clause
+where clause      -->row by row
+group by clause   -->row by row
+having clause        -->group by group
+5. select clause     -->group by group
+6. order by          -->row by row
+
+Q: arrange all names of employee in descending order
+ans : select ename from emp order by ename desc;
