@@ -1,0 +1,4 @@
+app\MainApp.class
+model\Product.class
+util\DBConnection.class
+dao\ProductDAO.class
