@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="Lib1" class="dependencyInjection.Library1">
+        <property name="id" value="101"></property>
+        <property name="name" value="Friends"></property>
+        <property name="books">
+            <list>
+                <ref bean="B1"/>
+                <ref bean="B2"/>
+                <ref bean="B3"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="B1" class="dependencyInjection.Book">
+        <property name="bookid" value="1"></property>
+        <property name="bookName" value="Wings of fire"></property>
+    </bean>
+
+    <bean id="B2" class="dependencyInjection.Book">
+        <property name="bookid" value="2"></property>
+        <property name="bookName" value="Songs of Ice and fire"></property>
+    </bean>
+
+    <bean id="B3" class="dependencyInjection.Book">
+        <property name="bookid" value="3"></property>
+        <property name="bookName" value="Nothing"></property>
+    </bean>
+</beans>
